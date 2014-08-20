@@ -19,6 +19,10 @@ with open("recipes.csv", "rU") as csvfile:
 			for col in row:
 				print '%s: %s' % (header[colnum], col)
 				colnum += 1
+
+
+
+
 		#else:
 		#	colnum = 0
 		#	for col in row:
