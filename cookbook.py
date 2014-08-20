@@ -1,38 +1,41 @@
+# import csv functionality
 import csv
 
 
 html = "<body>"
 
+# opening in a way that will close the file when we are done
+with open("recipes.csv", "rU") as csvfile:
+	# reading file
+	reader = csv.reader(csvfile)
+
+	rownum = 0
+	for row in reader:
+		# Save header row.
+		if rownum == 0:
+			header = row
+		if rownum == 1:
+			colnum = 0
+			for col in row:
+				print '%s: %s' % (header[colnum], col)
+				colnum += 1
+		#else:
+		#	colnum = 0
+		#	for col in row:
+		#		print '%s: %s' % (header[colnum], col)
+		#		colnum += 1
+
+		rownum += 1
 
 
+		html = html + "div"
+		#for data in row:
+		#	html = html + "<td>" + data + "</td>"
 
+
+		html = html +"</div>\n"
 
 
 
 
 html = html + "</body>"
-
-print(html)
-
-
-
-
-
-
-
-html = "<table>"
-# writing out the header of the html
-html = html + "<thead><tr><th>title1</th><th>title2</th><th>title3</th></tr></thead><tbody>\n"
-
-with open("eggs.csv", "rU") as csvfile:
-	reader = csv.reader(csvfile)
-	for row in reader:
-		# we replaced this written out line with a loop below
-		# html = html + "<td>" + row[0] + "</td><td>" + row[1] + "</td><td>" + row[2] + "</td>
-		html = html + "<tr>"
-		for data in row:
-			html = html + "<td>" + data + "</td>"
-		html = html +"</tr>\n"
-
-html = html + "</tbody></table>"
-
