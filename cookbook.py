@@ -2,43 +2,45 @@
 import csv
 
 
-html = "<body>"
+html = "<body>\n"
 
 # opening in a way that will close the file when we are done
-with open("recipes.csv", "rU") as csvfile:
-	# reading file
-	reader = csv.reader(csvfile)
+#with open("recipes.csv", "rb") as csvfile:
 
-	rownum = 0
-	for row in reader:
-		# Save header row.
-		if rownum == 0:
-			header = row
-		if rownum == 1:
-			colnum = 0
-			for col in row:
-				print '%s: %s' % (header[colnum], col)
-				colnum += 1
+# reading file
+
+file_name = 'recipes.csv'
+delimiter = ','
+quote_character = '"'
+
+csv_recipes = open(file_name, 'rU')
+csv_reader = csv.DictReader(csv_recipes, fieldnames=[], restkey='undefined-fieldnames', delimiter=delimiter, quotechar=quote_character)
+
+current_row = 0
+
+for row in csv_reader:
+	current_row += 1
+
+	# Use heading row as field names for all other rows
+	if current_row == 1:
+		csv_reader.fieldnames = row['undefined-fieldnames']
+		continue
+	if current_row > 1:
+		html = html + "<section>\n <ul>\n"
+
+		for data in row:
+			html = html + "<li>" + data + "</li>\n" #how do I describe value in key value pairs?
+			#possibly list out every row['Title'] as an option and then if None, etc. should be able to loop through all of them generically though.
+
+		html = html + "</ul>\n" + "</section\n"
+
+print(html)
+
+	#print(row['Title'] + '/' + row['Directions'])
 
 
-
-
-		#else:
-		#	colnum = 0
-		#	for col in row:
-		#		print '%s: %s' % (header[colnum], col)
-		#		colnum += 1
-
-		rownum += 1
-
-
-		html = html + "div"
 		#for data in row:
 		#	html = html + "<td>" + data + "</td>"
-
-
-		html = html +"</div>\n"
-
 
 
 
