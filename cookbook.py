@@ -28,8 +28,8 @@ for row in csv_reader:
 	if current_row > 1:
 		html = html + "<section>\n <ul>\n"
 
-		for data in row:
-			html = html + "<li>" + data + "</li>\n" #how do I describe value in key value pairs?
+		for data in row.values():
+			html = html + "<li>" + str(data) + "</li>\n" #how do I describe value in key value pairs?
 			#possibly list out every row['Title'] as an option and then if None, etc. should be able to loop through all of them generically though.
 
 		html = html + "</ul>\n" + "</section\n"
